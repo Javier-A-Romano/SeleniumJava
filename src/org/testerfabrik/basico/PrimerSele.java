@@ -1,6 +1,8 @@
 package org.testerfabrik.basico;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class PrimerSele {
@@ -24,7 +26,26 @@ public class PrimerSele {
 
         System.out.println(actualResult.contentEquals(expectedResult)?"TEST OK = " + actualResult : "TEST FAIL");
 
+        driver.manage().window().maximize();
+        String titleAR = "Mercado Libre Argentina";
+        String titleResult="";
+        driver.findElement(By.id("AR")).click();
+        titleResult=driver.getTitle();
+        System.out.println(titleResult.contentEquals(titleAR)?"TEST OK = " + titleResult : "TEST FAIL");
+        //driver.findElement(By.linkText("Ingresá lo que quieras encontrar")).click();
 
-        driver.close();
+        WebElement busqueda = driver.findElement(By.xpath("/html/body/header/div/form/input"));
+
+        busqueda.sendKeys("xbox one");
+
+        driver.findElement(By.xpath("/html/body/header/div/form/button")).click();
+
+        String TitleXbox = "Xbox One | MercadoLibre.com.ar";
+        String titleXboxResult = "";
+        titleXboxResult=driver.getTitle();
+
+        System.out.println(titleXboxResult.contentEquals(TitleXbox)?"TEST OK = " + titleXboxResult : "TEST FAIL");
+
+        //driver.close();
     }
 }
